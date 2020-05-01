@@ -1,0 +1,15 @@
+name: item_selector_example
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  item_selector:
+    path:
+      ../
+
+flutter:
+  uses-material-design: true
