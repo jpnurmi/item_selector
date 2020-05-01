@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [0.1.0] - 2020-MM-DD
 
-* TODO: Describe initial release.
+* Initial release based on Multi Select GridView in Flutter - by Simon Lightfoot:
+  https://gist.github.com/slightfoot/a002dd1e031f5f012f810c6d5da14a11

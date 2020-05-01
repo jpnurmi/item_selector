@@ -28,31 +28,36 @@
 //
 // Thanks to Hugo Passos.
 //
+import 'package:flutter/widgets.dart';
 
-/// A generic item selector that works in conjunction with [ListView], [GridView],
-/// [Row], [Column], or basically any parent widget that can have indexed child
-/// widgets.
+/// Specifies how an item selection controller responds to user interaction.
 ///
-/// ### Example
-///
-///     Widget build(BuildContext context) {
-///       return ItemSelectionController(
-///         child: ListView.builder(
-///           itemCount: 100,
-///           itemBuilder: (BuildContext context, int index) {
-///             return ItemSelectionBuilder(
-///               index: index,
-///               builder: (BuildContext context, int index, bool selected) {
-///                 return Text('$index: $selected');
-///               },
-///             );
-///           },
-///         ),
-///       );
-///     }
-library item_selector;
+/// See also [ItemSelectionController()].
+enum ItemSelectionMode {
+  /// No interactive selection.
+  none,
 
-export 'src/item_selection.dart';
-export 'src/item_selection_builder.dart';
-export 'src/item_selection_controller.dart';
-export 'src/item_selection_types.dart' hide ItemSelectionMetaData;
+  /// Single-selection by tap.
+  single,
+
+  /// Multi-selection by long-press and drag (default).
+  multi,
+}
+
+/// Signature for a callback function that is called by [ItemSelectionController]
+/// when items are interactively selected by the user.
+typedef ItemSelectionActionCallback = bool Function(int start, int end);
+
+/// Signature for a callback function that is called by [ItemSelection] when an
+/// item selection state changes to [selected] at the specified [index].
+typedef ItemSelectionChangeCallback = void Function(int index, bool selected);
+
+/// Signature for a builder function that is called by [ItemSelectionBuilder] to
+/// create a widget for a given [index] and [selected] state.
+typedef ItemSelectionWidgetBuilder = Widget Function(
+    BuildContext context, int index, bool selected);
+
+class ItemSelectionMetaData {
+  final int index;
+  ItemSelectionMetaData({@required this.index});
+}
