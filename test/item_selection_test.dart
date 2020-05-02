@@ -24,6 +24,14 @@ class ItemSelectionListener {
 void main() {
   final Matcher throwsStateError = throwsA(isA<StateError>());
 
+  test('copy', () {
+    final selection = ItemSelection(0, 4);
+    final copy = ItemSelection.copy(selection);
+    expect(copy.toList(), [0, 1, 2, 3, 4]);
+    expect(copy.toString(), selection.toString());
+    expect(identical(copy, selection), isFalse);
+  });
+
   test('empty', () {
     expect(ItemSelection(), isEmpty);
     expect(ItemSelection(0, 1), isNotEmpty);

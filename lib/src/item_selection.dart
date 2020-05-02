@@ -74,6 +74,10 @@ class ItemSelection extends ItemSelectionNotifier with IterableMixin<int> {
     }
   }
 
+  /// Creates a copy of the [other] selection.
+  factory ItemSelection.copy(ItemSelection other) =>
+      ItemSelection()..addAll(other);
+
   /// Returns `true` if this selection is empty.
   bool get isEmpty => _tree.isEmpty;
 
