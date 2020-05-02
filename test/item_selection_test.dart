@@ -109,13 +109,21 @@ void main() {
     expect(selection.toList(), [0, 1, 2, 4, 5]);
     expect(listener.takeAll(), {3: false});
 
-    selection.remove(4, 5);
-    expect(selection.toList(), [0, 1, 2]);
-    expect(listener.takeAll(), {4: false, 5: false});
+    selection.remove(2, 4);
+    expect(selection.toList(), [0, 1, 5]);
+    expect(listener.takeAll(), {2: false, 4: false});
 
-    selection.remove(0, 2);
+    selection.remove(5);
+    expect(selection.toList(), [0, 1]);
+    expect(listener.takeAll(), {5: false});
+
+    selection.remove(1);
+    expect(selection.toList(), [0]);
+    expect(listener.takeAll(), {1: false});
+
+    selection.remove(0);
     expect(selection.toList(), []);
-    expect(listener.takeAll(), {0: false, 1: false, 2: false});
+    expect(listener.takeAll(), {0: false});
 
     selection.remove(3);
     expect(selection.toList(), []);

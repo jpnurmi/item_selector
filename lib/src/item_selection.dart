@@ -29,6 +29,7 @@
 // Thanks to Hugo Passos.
 //
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:interval_tree/interval_tree.dart';
 
@@ -108,14 +109,22 @@ class ItemSelection extends ItemSelectionNotifier with IterableMixin<int> {
 
   /// Removes the selection range from [start] to [end].
   void remove(int start, [int end]) {
-    end ??= start;
     if (_tree.isEmpty) return;
-    final removal = IntervalTree([start - 1, end + 1]);
-    removal.removeAll(_tree.intersection(removal));
-    for (int i = start; i <= end; ++i) {
-      notifyListeners(i, false);
+    start = max(start, first);
+    end = min(end ?? start, last);
+    final removal = _tree.intersection(IntervalTree([start, end]));
+    for (final range in removal) {
+      for (int i = range.start; i <= range.end; ++i) {
+        notifyListeners(i, false);
+      }
     }
+    final startAtBounds = _tree.contains([start - 1, start - 1]) &&
+        !_tree.contains([start - 2, start - 2]);
+    final endAtBounds = _tree.contains([end + 1, end + 1]) &&
+        !_tree.contains([end + 2, end + 2]);
     _tree.remove([start - 1, end + 1]);
+    if (startAtBounds) _tree.add([start - 1, start - 1]);
+    if (endAtBounds) _tree.add([end + 1, end + 1]);
   }
 
   /// Replaces the existing selection with a selection range from [start] to
