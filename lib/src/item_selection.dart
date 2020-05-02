@@ -107,6 +107,14 @@ class ItemSelection extends ItemSelectionNotifier with IterableMixin<int> {
     _tree.add([start, end]);
   }
 
+  /// Adds all selection ranges to this selection,
+  /// that are in the [other] selection.
+  void addAll(ItemSelection other) {
+    for (final iv in other._tree) {
+      add(iv.start, iv.end);
+    }
+  }
+
   /// Removes the selection range from [start] to [end].
   void remove(int start, [int end]) {
     if (_tree.isEmpty) return;
@@ -125,6 +133,14 @@ class ItemSelection extends ItemSelectionNotifier with IterableMixin<int> {
     _tree.remove([start - 1, end + 1]);
     if (startAtBounds) _tree.add([start - 1, start - 1]);
     if (endAtBounds) _tree.add([end + 1, end + 1]);
+  }
+
+  /// Removes all selection ranges from this selection,
+  /// that are in the [other] selection.
+  void removeAll(ItemSelection other) {
+    for (final iv in other._tree) {
+      remove(iv.start, iv.end);
+    }
   }
 
   /// Replaces the existing selection with a selection range from [start] to

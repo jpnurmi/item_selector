@@ -99,6 +99,17 @@ void main() {
     expect(listener.takeAll(), {});
   });
 
+  test('addAll', () {
+    final selection = ItemSelection();
+    expect(selection.toList(), []);
+
+    ItemSelectionListener listener = ItemSelectionListener(selection, 0, 5);
+
+    selection.addAll(ItemSelection(0, 1)..add(4, 5));
+    expect(selection.toList(), [0, 1, 4, 5]);
+    expect(listener.takeAll(), {0: true, 1: true, 4: true, 5: true});
+  });
+
   test('remove', () {
     final selection = ItemSelection(0, 5);
     expect(selection.toList(), [0, 1, 2, 3, 4, 5]);
@@ -128,6 +139,17 @@ void main() {
     selection.remove(3);
     expect(selection.toList(), []);
     expect(listener.takeAll(), {});
+  });
+
+  test('removeAll', () {
+    final selection = ItemSelection(0, 5);
+    expect(selection.toList(), [0, 1, 2, 3, 4, 5]);
+
+    ItemSelectionListener listener = ItemSelectionListener(selection, 0, 5);
+
+    selection.removeAll(ItemSelection(0, 1)..add(4, 5));
+    expect(selection.toList(), [2, 3]);
+    expect(listener.takeAll(), {0: false, 1: false, 4: false, 5: false});
   });
 
   test('replace', () {
