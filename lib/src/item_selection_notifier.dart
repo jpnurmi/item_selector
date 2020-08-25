@@ -35,7 +35,6 @@ import 'package:flutter/foundation.dart';
 
 import 'item_selection_types.dart';
 
-@visibleForTesting
 abstract class ItemSelectionNotifier {
   /// Adds a [listener] callback for selection changes at any index.
   void addListener(ItemSelectionChangeCallback listener) {
@@ -68,7 +67,6 @@ abstract class ItemSelectionNotifier {
 
   /// Notifies all the registered listeners.
   @protected
-  @visibleForTesting
   void notifyListeners(int index, bool selected) {
     assert(_debugAssertNotDisposed());
     if (_listeners != null) {
