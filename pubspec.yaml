@@ -1,5 +1,5 @@
 name: item_selector
-version: 0.1.0
+version: 0.1.1
 description: >-
   A generic item selector that works with ListView, GridView, Row, Column,
   or basically any parent widget that can have indexed child widgets.

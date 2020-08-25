@@ -1,3 +1,8 @@
+## [0.1.1] - 2020-08-25
+
+* Revamped the example to make it show up on pub.dev
+* Addressed static analysis warnings
+
 ## [0.1.0] - 2020-05-02
 
 * Initial release based on Multi Select GridView in Flutter - by Simon Lightfoot:
