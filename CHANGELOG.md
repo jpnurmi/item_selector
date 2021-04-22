@@ -1,3 +1,7 @@
+## [0.2.0] - 2021-04-22
+
+* Migrated to null-safety
+
 ## [0.1.1] - 2020-08-25
 
 * Revamped the example to make it show up on pub.dev
