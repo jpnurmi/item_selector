@@ -39,29 +39,29 @@ abstract class ItemSelectionNotifier {
   /// Adds a [listener] callback for selection changes at any index.
   void addListener(ItemSelectionChangeCallback listener) {
     assert(_debugAssertNotDisposed());
-    _listeners.add(listener);
+    _listeners!.add(listener);
   }
 
   /// Removes a [listener] callback for selection changes at any index.
   void removeListener(ItemSelectionChangeCallback listener) {
     assert(_debugAssertNotDisposed());
-    _listeners.remove(listener);
+    _listeners!.remove(listener);
   }
 
   /// Adds a [listener] callback for selection changes at a specific [index] only.
   void addIndexListener(int index, ItemSelectionChangeCallback listener) {
     assert(_debugAssertNotDisposed());
-    if (!_indexListeners.containsKey(index)) {
-      _indexListeners[index] = ObserverList<ItemSelectionChangeCallback>();
+    if (!_indexListeners!.containsKey(index)) {
+      _indexListeners![index] = ObserverList<ItemSelectionChangeCallback>();
     }
-    _indexListeners[index].add(listener);
+    _indexListeners![index]!.add(listener);
   }
 
   /// Removes a [listener] callback for selection changes at a specific [index] only.
   void removeIndexListener(int index, ItemSelectionChangeCallback listener) {
     assert(_debugAssertNotDisposed());
-    if (_indexListeners.containsKey(index)) {
-      _indexListeners[index].remove(listener);
+    if (_indexListeners!.containsKey(index)) {
+      _indexListeners![index]!.remove(listener);
     }
   }
 
@@ -71,7 +71,7 @@ abstract class ItemSelectionNotifier {
     assert(_debugAssertNotDisposed());
     if (_listeners != null) {
       final allListeners = List<ItemSelectionChangeCallback>.from(
-          [..._listeners, ...?_indexListeners[index]]);
+          [..._listeners!, ...?_indexListeners![index]]);
       for (final listener in allListeners) {
         try {
           listener(index, selected);
@@ -121,8 +121,8 @@ abstract class ItemSelectionNotifier {
     return true;
   }
 
-  ObserverList<ItemSelectionChangeCallback> _listeners =
+  ObserverList<ItemSelectionChangeCallback>? _listeners =
       ObserverList<ItemSelectionChangeCallback>();
-  HashMap<int, ObserverList<ItemSelectionChangeCallback>> _indexListeners =
+  HashMap<int, ObserverList<ItemSelectionChangeCallback>>? _indexListeners =
       HashMap<int, ObserverList<ItemSelectionChangeCallback>>();
 }

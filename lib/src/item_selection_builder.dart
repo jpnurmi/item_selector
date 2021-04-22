@@ -68,12 +68,11 @@ class ItemSelectionBuilder extends StatefulWidget {
   /// and a [builder] method that is called when the selection state of that
   /// particular index changes.
   ItemSelectionBuilder({
-    Key key,
-    @required this.index,
-    ItemSelectionController controller,
-    @required ItemSelectionWidgetBuilder builder,
+    Key? key,
+    required this.index,
+    ItemSelectionController? controller,
+    required ItemSelectionWidgetBuilder builder,
   })  : assert(index != -1),
-        assert(builder != null),
         _controller = controller,
         _builder = builder,
         super(key: key ?? ValueKey(index));
@@ -85,12 +84,12 @@ class ItemSelectionBuilder extends StatefulWidget {
   _ItemSelectionBuilderState createState() => _ItemSelectionBuilderState();
 
   final ItemSelectionWidgetBuilder _builder;
-  final ItemSelectionController _controller;
+  final ItemSelectionController? _controller;
 }
 
 class _ItemSelectionBuilderState extends State<ItemSelectionBuilder> {
   bool _selected = false;
-  ItemSelectionController _controller;
+  ItemSelectionController? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +102,8 @@ class _ItemSelectionBuilderState extends State<ItemSelectionBuilder> {
   @override
   void dispose() {
     if (_controller != null) {
-      _controller.selection.removeIndexListener(widget.index, _updateSelection);
+      _controller!.selection
+          .removeIndexListener(widget.index, _updateSelection);
     }
     _controller = null;
     super.dispose();
@@ -140,12 +140,12 @@ class _ItemSelectionBuilderState extends State<ItemSelectionBuilder> {
 
     final index = widget.index;
     if (_controller != null) {
-      _controller.selection.removeIndexListener(index, _updateSelection);
+      _controller!.selection.removeIndexListener(index, _updateSelection);
     }
     _controller = newController;
     if (_controller != null) {
-      _controller.selection.addIndexListener(index, _updateSelection);
-      _updateSelection(index, _controller.selection.contains(index));
+      _controller!.selection.addIndexListener(index, _updateSelection);
+      _updateSelection(index, _controller!.selection.contains(index));
     }
   }
 

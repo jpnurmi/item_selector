@@ -59,5 +59,5 @@ typedef ItemSelectionWidgetBuilder = Widget Function(
 
 class ItemSelectionMetaData {
   final int index;
-  ItemSelectionMetaData({@required this.index});
+  ItemSelectionMetaData({required this.index});
 }

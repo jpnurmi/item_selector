@@ -9,10 +9,6 @@ void main() {
   final Matcher throwsAssertionError = throwsA(isA<AssertionError>());
 
   testWidgets('errors', (WidgetTester tester) async {
-    // builder required
-    expect(() => ItemSelectionBuilder(index: 0, builder: null),
-        throwsAssertionError);
-
     // invalid index
     expect(
         () => ItemSelectionBuilder(

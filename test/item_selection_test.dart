@@ -41,16 +41,14 @@ void main() {
     ItemSelection empty = ItemSelection();
     expect(empty.isEmpty, isTrue);
     expect(empty.isNotEmpty, isFalse);
-    expect(empty.first, isNull);
-    expect(empty.last, isNull);
     expect(empty.length, 0);
     expect(() => empty.single, throwsStateError);
 
     final single = ItemSelection(0, 0);
     expect(single.isEmpty, isFalse);
     expect(single.isNotEmpty, isTrue);
-    expect(single.first, isNotNull);
-    expect(single.last, isNotNull);
+    expect(single.first, isZero);
+    expect(single.last, isZero);
     expect(single.length, 1);
     expect(single.single, 0);
 

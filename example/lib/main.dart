@@ -25,9 +25,9 @@ final pages = <PageData>[
 
 class PageData {
   const PageData({this.title, this.icon, this.builder});
-  final String title;
-  final IconData icon;
-  final WidgetBuilder builder;
+  final String? title;
+  final IconData? icon;
+  final WidgetBuilder? builder;
 }
 
 class ExampleApp extends StatefulWidget {
@@ -50,7 +50,7 @@ class _ExampleAppState extends State<ExampleApp> {
           duration: Duration(milliseconds: 246),
           child: Container(
             key: ValueKey<int>(currentPage),
-            child: pages[currentPage].builder(context),
+            child: pages[currentPage].builder!(context),
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -59,7 +59,7 @@ class _ExampleAppState extends State<ExampleApp> {
           items: pages
               .map((page) => BottomNavigationBarItem(
                     icon: Icon(page.icon),
-                    title: Text(page.title),
+                    title: Text(page.title!),
                   ))
               .toList(),
         ),

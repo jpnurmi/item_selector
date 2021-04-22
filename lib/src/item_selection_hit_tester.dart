@@ -38,8 +38,8 @@ import 'item_selection_types.dart';
 
 class ItemSelectionHitTester extends SingleChildRenderObjectWidget {
   ItemSelectionHitTester({
-    Key key,
-    @required Widget child,
+    Key? key,
+    required Widget child,
   }) : super(key: key, child: child);
 
   @override

@@ -4,12 +4,12 @@ import 'package:item_selector/item_selector.dart';
 
 class ItemSelectionTestWidget extends Container {
   ItemSelectionTestWidget(
-      {int itemCount,
-      ItemSelectionActionCallback onSelectionStart,
-      ItemSelectionActionCallback onSelectionUpdate,
-      ItemSelectionActionCallback onSelectionEnd,
-      ItemSelectionWidgetBuilder builder,
-      ItemSelection selection})
+      {required int itemCount,
+      ItemSelectionActionCallback? onSelectionStart,
+      ItemSelectionActionCallback? onSelectionUpdate,
+      ItemSelectionActionCallback? onSelectionEnd,
+      ItemSelectionWidgetBuilder? builder,
+      ItemSelection? selection})
       : super(
           child: Directionality(
             textDirection: TextDirection.ltr,
@@ -22,7 +22,7 @@ class ItemSelectionTestWidget extends Container {
                 children: List.generate(itemCount, (index) {
                   return ItemSelectionBuilder(
                     index: index,
-                    builder: builder,
+                    builder: builder!,
                   );
                 }),
               ),

@@ -61,9 +61,9 @@ class ItemSelectionController extends StatefulWidget {
   final Widget child;
   final ItemSelection _selection;
   final ItemSelectionMode _selectionMode;
-  final ItemSelectionActionCallback _onSelectionStart;
-  final ItemSelectionActionCallback _onSelectionUpdate;
-  final ItemSelectionActionCallback _onSelectionEnd;
+  final ItemSelectionActionCallback? _onSelectionStart;
+  final ItemSelectionActionCallback? _onSelectionUpdate;
+  final ItemSelectionActionCallback? _onSelectionEnd;
   final EdgeInsets _scrollInsets;
   final Duration _scrollDuration;
 
@@ -95,15 +95,15 @@ class ItemSelectionController extends StatefulWidget {
   /// outside the viewport, [scrollInsets] and [scrollDuration] may be specified
   /// to control auto-scrolling. The defaults are _48 px_ and _125 ms_.
   ItemSelectionController(
-      {Key key,
-      @required this.child,
-      ItemSelection selection,
-      ItemSelectionMode selectionMode,
-      ItemSelectionActionCallback onSelectionStart,
-      ItemSelectionActionCallback onSelectionUpdate,
-      ItemSelectionActionCallback onSelectionEnd,
-      EdgeInsets scrollInsets,
-      Duration scrollDuration})
+      {Key? key,
+      required this.child,
+      ItemSelection? selection,
+      ItemSelectionMode? selectionMode,
+      ItemSelectionActionCallback? onSelectionStart,
+      ItemSelectionActionCallback? onSelectionUpdate,
+      ItemSelectionActionCallback? onSelectionEnd,
+      EdgeInsets? scrollInsets,
+      Duration? scrollDuration})
       : _selection = selection ?? ItemSelection(),
         _selectionMode = selectionMode ?? ItemSelectionMode.multi,
         _scrollInsets = scrollInsets ?? const EdgeInsets.all(48),
@@ -118,23 +118,23 @@ class ItemSelectionController extends StatefulWidget {
 
   bool _startSelection(int start, int end) {
     if (_onSelectionStart == null) return false;
-    return _onSelectionStart(start, end);
+    return _onSelectionStart!(start, end);
   }
 
   bool _updateSelection(int start, int end) {
     if (_onSelectionUpdate == null) return false;
-    return _onSelectionUpdate(start, end);
+    return _onSelectionUpdate!(start, end);
   }
 
   bool _endSelection(int start, int end) {
     if (_onSelectionEnd == null) return false;
-    return _onSelectionEnd(start, end);
+    return _onSelectionEnd!(start, end);
   }
 
   /// Returns an ItemSelectionController instance for the given build [context],
   /// or `null` if not found.
-  static ItemSelectionController of(BuildContext context) {
-    final _ItemSelectionScope scope =
+  static ItemSelectionController? of(BuildContext context) {
+    final _ItemSelectionScope? scope =
         context.dependOnInheritedWidgetOfExactType<_ItemSelectionScope>();
     return scope?.controller;
   }
@@ -189,7 +189,7 @@ class _ItemSelectionControllerState extends State<ItemSelectionController> {
   }
 
   int _hitTestAt(Offset position) {
-    final RenderItemSelectionHitTester hitTester = context.findRenderObject();
+    final RenderItemSelectionHitTester? hitTester = context.findRenderObject() as RenderItemSelectionHitTester?;
     return hitTester?.hitTestAt(
             position, widget._scrollInsets, widget._scrollDuration) ??
         -1;
@@ -220,11 +220,11 @@ class _ItemSelectionControllerState extends State<ItemSelectionController> {
 }
 
 class _ItemSelectionScope extends InheritedWidget {
-  final ItemSelectionController controller;
+  final ItemSelectionController? controller;
 
   const _ItemSelectionScope({
-    Key key,
-    Widget child,
+    Key? key,
+    required Widget child,
     this.controller,
   }) : super(key: key, child: child);
 
