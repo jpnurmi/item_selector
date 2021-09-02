@@ -3,7 +3,7 @@
 [![pub](https://img.shields.io/pub/v/item_selector.svg)](https://pub.dev/packages/item_selector)
 [![license: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![build](https://github.com/jpnurmi/item_selector/workflows/build/badge.svg)
-[![codecov](https://codecov.io/gh/jpnurmi/item_selector/branch/master/graph/badge.svg)](https://codecov.io/gh/jpnurmi/item_selector)
+[![codecov](https://codecov.io/gh/jpnurmi/item_selector/branch/main/graph/badge.svg)](https://codecov.io/gh/jpnurmi/item_selector)
 
 A generic [Flutter](https://flutter.dev) item selector that works with
 ListView, GridView, Row, Column, or basically any parent widget that
